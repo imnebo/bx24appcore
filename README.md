@@ -1,2 +1,2 @@
-# Bitrix24 Core Appliaction farmework including rest api functionaity
+# Bitrix24 Core Appliaction farmework including rest api functionality and ...
 # Author: Norayr Petrosyan  <a target="_blank" href="https://facebook.com/nordeveloper">Facebook</a>

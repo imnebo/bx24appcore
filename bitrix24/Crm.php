@@ -45,6 +45,16 @@ class Crm
     {
         return $this->restCommand('user.current', array());
     }
+	
+	function getUsers($params = array()){
+        $resUsers = $this->restCommand('user.get', $params);
+
+        foreach ($resUsers['result'] as $user){
+            $arUsers[$user['ID']] = $user;
+        }
+
+        return $arUsers;
+    }
 
     public function getContactList($params = array())
     {
@@ -81,12 +91,19 @@ class Crm
         return $this->restCommand('crm.contact.userfield.list', $params);
     }
 
-    public function getCompanieList($params = array())
+    public function getCompanyList($params = array())
     {
         return $this->restCommand('crm.company.list', $params);
     }
 
-    public function CompanieAdd($params = array())
+    public function getCompanyById($id)
+    {
+        return $this->restCommand('crm.company.get', $params = array(
+            'id' => $id
+        ));
+    }
+
+    public function CompanyAdd($params = array())
     {
         return $this->restCommand('crm.company.add',     array(
             "fields" => $params,
@@ -94,7 +111,7 @@ class Crm
         ));
     }
 
-    public function CompanieUpdate($id, $params = array())
+    public function CompanyUpdate($id, $params = array())
     {
         return $this->restCommand(
             'crm.company.update',
@@ -106,10 +123,15 @@ class Crm
         );
     }
 
-    public function CompanieDelete($id)
+    public function CompanyDelete($id)
     {
         return $this->restCommand('crm.company.delete', array('id' => $id));
     }
+
+    public function getCompanFields()
+    {
+        return $this->restCommand('crm.company.fields');
+    }   
 
 
     public function getCompanyUserFields($params = array())
@@ -147,9 +169,15 @@ class Crm
         return $this->restCommand('crm.deal.delete', array('id' => $id));
     }
 
+    public function getDealFields()
+    {
+        return $this->restCommand('crm.deal.fields');
+    }
+    
+
     public function getDealUserFields()
     {
-        return $this->restCommand('crm.deal.userfield.list ');
+        return $this->restCommand('crm.deal.userfield.list');
     }
 
     public function getLeadList($params = array())
@@ -185,6 +213,12 @@ class Crm
     {
         return $this->restCommand('crm.lead.userfield.list', $params);
     }
+
+    public function getLeadFields()
+    {
+        return $this->restCommand('crm.lead.fields');
+    }
+    
 
 
     public function getProductList($params = array())
@@ -273,6 +307,13 @@ class Crm
         );
     }
 
+    public function getListFields($params = array())
+    {
+        return $this->restCommand('lists.field.get', $params);
+    }
+    
+    
+
     public function getActivityList( $params = array())
     {
         return $this->restCommand('bizproc.activity.list', $params = array());
@@ -293,7 +334,7 @@ class Crm
         ));
     }
 
-    public function createFile()
+    public function CreateFile()
     {
         $file = $_FILES['file']['tmp_name'];
         $filename = $_FILES['file']['name'];
@@ -304,7 +345,6 @@ class Crm
             ),
             'fileContent' => base64_encode(file_get_contents($_FILES['file']['tmp_name'])),
         ));
-        // print_R($a);
     }
 
     public function getContactById($id)
@@ -317,13 +357,6 @@ class Crm
     public function getDealById($id)
     {
         return $this->restCommand('crm.deal.get', array(
-            'id' => $id
-        ));
-    }
-
-    public function getCompanyById($id)
-    {
-        return $this->restCommand('crm.company.get', $params = array(
             'id' => $id
         ));
     }
@@ -390,18 +423,68 @@ class Crm
 
     function getEntityDelete($params=array()){
         return $this->restCommand('entity.item.delete', $params);
+    }     
+
+    function bizproc_start( $params = array() ){
+        return $this->restCommand('bizproc.workflow.start', $params);	   
     }
 
+     
+    function bizproc_activity_list( $params = array() ){
+        return $this->restCommand('bizproc.activity.list', $params);	   
+    }  
 
-    function getUsers($params = array()){
-        $resUsers = $this->restCommand('user.get', $params);
+    function bizproc_activity_add( $params = array() ){
+        return $this->restCommand('bizproc.activity.add', $params);	   
+    }  
 
-        foreach ($resUsers['result'] as $user){
-            //dump($user);
-            $arUsers[$user['ID']] = $user;
-        }
+    function bizproc_activity_delete( $params = array() ){
+        return $this->restCommand('bizproc.activity.delete', $params);	   
+    } 
+    
+    function bizproc_activity_update( $params = array() ){
+        return $this->restCommand('bizproc.activity.update', $params);	   
+    } 
+    
 
-       return $arUsers;
+    function bizproc_provider_add( $params = array() ){
+        return $this->restCommand('bizproc.provider.add', $params);	   
+    }
+
+    function bizproc_provider_list( $params = array() ){
+        return $this->restCommand('bizproc.provider.list', $params);	   
+    } 
+    
+    function bizproc_provider_delete( $params = array() ){
+        return $this->restCommand('bizproc.provider.delete', $params);	   
+    }    
+    
+
+   function bizproc_event_send( $params = array() ){
+	  return $this->restCommand('bizproc.event.send', $params);	   
    }
+
+
+  function im_notify( $params = array() ){
+    return $this->restCommand('im.notify', $params);	   
+  }  
+
+  function bizproc_robot_list( $params = array() ){
+    return $this->restCommand('bizproc.robot.list', $params);	   
+  }
+
+  function bizproc_robot_add( $params = array() ){
+    return $this->restCommand('bizproc.robot.add', $params);	   
+  }
+
+
+  function bizproc_robot_delete( $params = array() ){
+    return $this->restCommand('bizproc.robot.delete', $params);	   
+  }
+
+  function bizproc_robot_update( $params = array() ){
+    return $this->restCommand('bizproc.robot.update', $params);	   
+  }
+
 
 }

@@ -409,11 +409,11 @@ class Crm
     }
 
     function taskAdd($params){
-        return $this->restCommand('tasks.task.add', array("fields"=>$params),  );
+        return $this->restCommand('tasks.task.add', array("fields"=>$params));
     }
 
-    function taskUpdate($id, $params=array()){
-        return $this->restCommand('tasks.task.update', "taskId"=$id, array("fields"=>$params) );
+    function taskUpdate($id, $fields=array()){
+        return $this->restCommand('tasks.task.update', $id, array("fields"=>$fields) );
     }    
 
     function getEntityItems($params=array() ){

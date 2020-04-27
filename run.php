@@ -6,7 +6,8 @@ require __DIR__ . "/vendor/autoload.php";
 
 use Bitrix24\Crm;
 
-$webhook = 'your bitrix214 webhook dont forget to put the slash (/) at the end ';
+//$webhook = 'your bitrix214 webhook dont forget to put the slash (/) at the end ';
+$webhook = 'https://kreativsites.bitrix24.ru/rest/1/4ztqro8x4ap64c9r/';
 $crm = new Crm($webhook);
 
 // Using Armsoft With WSDL \\

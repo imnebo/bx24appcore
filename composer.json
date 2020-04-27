@@ -11,5 +11,8 @@
             "Bitrix24\\": "bitrix24",
             "App\\": "app"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.0"
     }
 }

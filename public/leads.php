@@ -1,6 +1,8 @@
 <?php
 
-$id = intval($_GET['id']);
+require "../run.php";
+
+// $id = intval($_GET['id']);
 
 // $contactId = $_POST['contactId'];
 // $companieId = $_POST['companieId'];
@@ -11,13 +13,14 @@ $id = intval($_GET['id']);
 // $currencyId = $_POST['currencyId'];
 // $price = $_POST['price'];
 // $phoneNumber = $_POST['phoneNumber'];
-require "../run.php";
 
 $getLeads = $crm->getLeadList(array(
     'order' => ["ID" => "DESC"],
     // 'filter' => [">PROBABILITY"=> 50 ], //["CATALOG_ID" => $catalogId],
     'select' => ["*", "UF_*"]
 ));
+
+dump($getLeads);
 
 
 // $resLeadAdd = $crm->LeadAdd(array(
@@ -57,5 +60,3 @@ $getLeads = $crm->getLeadList(array(
 // );
 
 // $resLeadDelete =  $crm->LeadDelete(3); //$crm->LeadDelete($id);
-echo '<pre>';
-print_r($getLeads);
